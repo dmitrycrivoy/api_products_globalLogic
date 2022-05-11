@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "product": "orange",
+        "remaining_quantity": 13,
+        "last_sold_quantity": 0
+    },
+    {
+        "id": 2,
+        "product": "apple",
+        "remaining_quantity": 55,
+        "last_sold_quantity": 0
+    }
+]
