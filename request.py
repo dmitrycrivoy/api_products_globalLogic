@@ -26,18 +26,19 @@ def print_menu():
         print(f"\nPlease enter number from 1 to {len(menu)}")
     return item_of_menu
 
-def make_table(data):
+def print_data(data):
     if "error" in data:
         return print(data)
     else:
-        print("{:<4} {:<12} {:<5}".format("ID", "NAME", "QUANTITY"))
+        table_format = "{:<4} {:<12} {:<5}"
+        print(table_format.format("ID", "NAME", "QUANTITY"))
         table = ''
         if type(data) == dict:
-            table += "{:<4} {:<12} {:<5}".format(data["id"], data["product"], 
+            table += table_format.format(data["id"], data["product"], 
                                             data["remaining_quantity"]) + "\n"
         elif type(data) == list:
             for i in data:
-                table += "{:<4} {:<12} {:<5}".format(i["id"], i["product"], 
+                table += table_format.format(i["id"], i["product"], 
                                             i["remaining_quantity"]) + "\n"
         return print(table)
 
@@ -46,7 +47,7 @@ def request(selection):
         response = requests.get(BASE_URL)
         data = response.json()
         print()
-        make_table(data)
+        print_data(data)
         print()
     elif selection == 2:
         product_id = input("\nEnter id of product: ")
@@ -54,7 +55,7 @@ def request(selection):
         full_url = BASE_URL + BUY_PATH + product_id
         response = requests.post(full_url)
         data = response.json()
-        make_table(data)
+        print_data(data)
 
 
 def main():
@@ -66,6 +67,6 @@ def main():
 if __name__ == '__main__':
     try:
         main()
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, EOFError):
         print('\nInterrupted by user')
         sys.exit()
