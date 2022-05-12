@@ -10,5 +10,11 @@
         "product": "apple",
         "remaining_quantity": 55,
         "last_sold_quantity": 0
+    },
+    {
+        "id": 3,
+        "product": "banana",
+        "remaining_quantity": 34,
+        "last_sold_quantity": 0
     }
 ]
