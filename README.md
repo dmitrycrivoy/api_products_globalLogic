@@ -1,22 +1,37 @@
-# Test
+# API for getting and buying products [GlobalLogic DevOps Academy Test]
 
-## Start server
+## Start app
+### 1. Start server
 ```bash
 python3 app.py
 ```
-
-## API
-### Get information about all products [get]:
+### 2. Start CLI app for user requests
 ```bash
-<server_ip:port>/products
+python3 request.py
 ```
 
-### Get information about product by product_id [get]:
+## API methods and urls
+### Get information about all products [GET]:
 ```bash
-<server_ip:port>/products/<product_id>
+<server_ip:port>
+```
+### Buy new product by id [PATCH]:
+```bash
+<server_ip:port>/buy/<id>
+```
+Requested data [JSON]:
+```bash
+{
+    "buy_amount": <int:product_amount>
+}
 ```
 
-### Add new product [post]:
+## Unit tests
+### 1. Start server
 ```bash
-<server_ip:port>/products
+python3 app.py
+```
+### 2. Run unit tests
+ ```bash
+python3 api_test.py
 ```
