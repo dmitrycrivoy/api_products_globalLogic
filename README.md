@@ -1,5 +1,10 @@
 # API for getting and buying products [GlobalLogic DevOps Academy Test]
 
+All actions are performed in the folder "api_products_globalLogic"
+```bash
+cd api_products_globalLogic
+```
+
 ## Start app
 ### 1. Start server
 ```bash
