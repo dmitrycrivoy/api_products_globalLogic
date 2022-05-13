@@ -1,6 +1,7 @@
 import requests, sys
 
 CRED = '\033[91m'
+CGREEN = '\033[92m'
 CEND = '\033[0m'
 
 BASE_URL = "http://127.0.0.1:5000/"
@@ -40,18 +41,22 @@ def select_menu_item():
 
 def print_data(data):
     for status in ["success", "error"]:
-        if status in data:
-            return print(data)
+        if status in data and status == "error":
+            return print(f"{CRED}{data['error']}{CEND}")
+        if status in data and status == "success":
+            return print(f"{CGREEN}{data['success']}{CEND}")
     table_format = "{:<4} {:<12} {:<5}"
     print(table_format.format("ID", "NAME", "QUANTITY"))
     table = ''
     if type(data) == dict:
         table += table_format.format(data["id"], data["product"], 
-                                     data["quantity"]) + "\n"
+                                     data["current_amount"]) \
+                                     + "\n"
     elif type(data) == list:
         for i in data:
             table += table_format.format(i["id"], i["product"], 
-                                         i["quantity"]) + "\n"
+                                         i["current_amount"]) \
+                                         + "\n"
     return print(table)
 
 def request(selection):
@@ -61,20 +66,21 @@ def request(selection):
         print()
         print_data(data)
     elif selection == 2:
-        product_id = input("\nEnter id of product: ")
-        check_positive_number(product_id)
-        buy_product_amount = input("\nEnter an amount of the " 
+        product_id_input = input("\nEnter id of the product: ")
+        product_id = check_positive_number(product_id_input)
+        if product_id == None:
+            return
+        buy_product_amount_input = input("\nEnter an amount of the " 
                                    + "product you want to buy: ")
-        check_positive_number(buy_product_amount)
+        buy_product_amount = check_positive_number(buy_product_amount_input)
+        if buy_product_amount == None:
+            return
 
-        buy_url = BASE_URL + BUY_PATH
+        buy_url = BASE_URL + BUY_PATH + f"/{product_id}"
         request_data = {
-            "product_id": product_id,
             "buy_amount": f"{buy_product_amount}"
         }
-        # headers = {'Content-Type': 'application/json'}
-        # response = requests.post(buy_url, headers=headers, json=request_data)
-        response = requests.post(buy_url, json=request_data)
+        response = requests.patch(buy_url, json=request_data)
         data = response.json()
         print_data(data)
 

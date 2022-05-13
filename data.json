@@ -1,20 +1,23 @@
 [
     {
         "id": 1,
-        "last_sold_quantity": 0,
         "product": "orange",
-        "quantity": 13
+        "current_amount": 13,
+        "last_sold": 0,
+        "total_sold": 0
     },
     {
         "id": 2,
-        "last_sold_quantity": 0,
         "product": "apple",
-        "quantity": 55
+        "current_amount": 55,
+        "last_sold": 0,
+        "total_sold": 0
     },
     {
         "id": 3,
-        "last_sold_quantity": 0,
         "product": "banana",
-        "quantity": 34
+        "current_amount": 34,
+        "last_sold": 0,
+        "total_sold": 0
     }
 ]
